@@ -9,9 +9,22 @@
 // is more functional than standard Promise, and if code depends on those features,
 // prehaps it should be included directly.
 define([
-    'kb_common/html'
+    'kb_common/html',
+
+    // Note bootstrap, although not really necessary in all cases, is still required
+    // if any bootstrap classes are used, as in the render() function below. 
+    // Well, not required, in that the ui build has no idea that the markup contains
+    // bootstrap style dependencies, but logically required because the bootsrap stylesheets are 
+    // only loaded if some code expresses that dependency. 
+    // Practically, though, but the time this code is loaded in the ui, bootstrap styles have been, 
+    // or will shortly be, loaded by other modules.
+    'bootstrap'
 ], function(
     html
+
+    // Also note that since bootstrap is loaded for "effect", and does not implement an actual code
+    // module it is not necessary to receive the module in an argument (it would not hurt, but
+    // the argument would never be used, and linters will complain abount the unused variable.)
 ) {
     'use strict';
 
