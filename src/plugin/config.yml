@@ -20,7 +20,7 @@ install:
             widget: pavel_demo_panel
     menu:
         -
-            name: pavelDemo
+            name: paveldemo
             definition:
                 path: pavel-demo
                 label: Pave'ls Demo
