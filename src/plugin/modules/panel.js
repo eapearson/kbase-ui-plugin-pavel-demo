@@ -10,6 +10,7 @@
 // prehaps it should be included directly.
 define([
     'kb_common/html',
+    './localDependency',
 
     // Note bootstrap, although not really necessary in all cases, is still required
     // if any bootstrap classes are used, as in the render() function below. 
@@ -20,7 +21,8 @@ define([
     // or will shortly be, loaded by other modules.
     'bootstrap'
 ], function(
-    html
+    html,
+    local
 
     // Also note that since bootstrap is loaded for "effect", and does not implement an actual code
     // module it is not necessary to receive the module in an argument (it would not hurt, but
@@ -32,7 +34,8 @@ define([
     // because it is a simply way of creating and demonstrating markup 
     // creation.
     var t = html.tag,
-        div = t('div');
+        div = t('div'),
+        p = t('p');
 
     function factory(config) {
         var hostNode, container,
@@ -57,7 +60,17 @@ define([
                     }, 'This is my plugin.'),
                     div({
                         class: 'col-md-6'
-                    }, 'This is another column')
+                    }, [
+                        p([
+                            'Local dependencies are easy to use. Just make a relative ',
+                            'path reference to the file, sans the ".js", in the module list ',
+                            'provided to "define".'
+                        ]),
+                        p([
+                            'This one, for instance, just contains the string: ',
+                            local
+                        ])
+                    ])
                 ])
             ]);
         }
@@ -84,6 +97,7 @@ define([
             return Promise.try(function() {
                 // usually rendering, or long async data loading, content generation, 
                 // would go here.
+                runtime.send('ui', 'setTitle', 'Pavel\'s Demo Plugin')
                 container.innerHTML = render();
             });
         }
